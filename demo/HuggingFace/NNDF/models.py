@@ -105,7 +105,8 @@ class ModelFileConverter:
         result = self.trt_engine_class(output_fpath, network_metadata, batch_size=batch_size)
         self.trt_inference_config = CreateConfig(
             fp16=network_metadata.precision.fp16,
-            max_workspace_size=result.DEFAULT_TRT_WORKSPACE_MB * 1024 * 1024,
+	    # Chosen by Yash
+            max_workspace_size=result.DEFAULT_TRT_WORKSPACE_MB * 1024 * 1024 * 1024,
             profiles=result.get_dynamic_shape_profiles(),
             obey_precision_constraints=result.use_obey_precision_constraints()
         )
